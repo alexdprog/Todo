@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage x:Class="TodoApp.Views.TodoArhivePage" x:Name="TodoArhivePageName" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" Title="Completed" xmlns:viewModels="clr-namespace:TodoApp.ViewModels;assembly=TodoApp">
+	<Grid RowDefinitions="1*, 52" Padding="{StaticResource ApplicationRootLayoutThicknes}" HorizontalOptions="StartAndExpand" VerticalOptions="Fill">
+		<ActivityIndicator HorizontalOptions="Center" IsRunning="{Binding Busy}" IsVisible="{Binding Busy}" VerticalOptions="CenterAndExpand" />
+
+	<ListView CachingStrategy="RecycleElement" IsVisible="{Binding Ready}" ItemsSource="{Binding TodoList}" HasUnevenRows="True" SelectionMode="None" SeparatorColor="Gray" SeparatorVisibility="Default">
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <ViewCell>
+                <VerticalStackLayout Padding="0,6,0,6"><Grid ColumnDefinitions="40,1*,40" ColumnSpacing="8"><CheckBox BackgroundColor="Transparent" IsEnabled="True" IsChecked="{Binding Done}" VerticalOptions="Center" Grid.Column="0"><CheckBox.Behaviors><toolkit:EventToCommandBehavior Command="{Binding Source={x:Reference TodoArhivePageName}, Path=ViewModel.ToggledCommand}" CommandParameter="{Binding .}" EventName="CheckedChanged" /></CheckBox.Behaviors></CheckBox><Label BackgroundColor="Transparent" Style="{StaticResource DataLabelStyle}" Text="{Binding Name}" VerticalOptions="Center" Grid.Column="1" />
+                <Image Grid.Column="2" Source="delete.png" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="24"><Image.GestureRecognizers><TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:TodoArhiveViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding .}" /></Image.GestureRecognizers></Image>
+            <Grid.GestureRecognizers><TapGestureRecognizer Command="{Binding OnExpand}" /></Grid.GestureRecognizers></Grid><VerticalStackLayout Padding="8,0,0,0" IsVisible="{Binding Expanded}">
+        <Grid ColumnDefinitions="Auto, 1*"><Label WidthRequest="80" Style="{StaticResource SubDataLabelStyle}" Text="Notes:" TextColor="{StaticResource Secondary}" VerticalOptions="Center" /><Label BackgroundColor="Transparent" Style="{StaticResource DataLabelStyle}" Text="{Binding Notes}" VerticalOptions="Center" Grid.Column="1" /></Grid>
+        <Grid ColumnDefinitions="Auto, 1*"><Label WidthRequest="80" Style="{StaticResource SubDataLabelStyle}" Text="Time:" TextColor="{StaticResource Secondary}" VerticalOptions="Center" /><Label BackgroundColor="Transparent" Style="{StaticResource DataLabelStyle}" Text="{Binding Time, StringFormat='{0:g}'}" VerticalOptions="Center" Grid.Column="1" /></Grid></VerticalStackLayout></VerticalStackLayout></ViewCell></DataTemplate></ListView.ItemTemplate></ListView></Grid>
+
+</ContentPage>

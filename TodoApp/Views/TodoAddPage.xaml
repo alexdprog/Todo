@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage x:Class="TodoApp.Views.TodoAddPage" xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" Title="Add your Todo">
+
+
+    <VerticalStackLayout Margin="16">
+        <Label Text="Name" />
+        <Entry x:Name="EntryName" Text="{Binding TodoValue.Name}" />
+        <Label Text="Notes" />
+        <Entry x:Name="EntryNotes" Text="{Binding TodoValue.Notes}" />
+        <HorizontalStackLayout Spacing="16"><Label Text="Done" VerticalOptions="Center" />
+        <CheckBox x:Name="SwitchDone" HorizontalOptions="Start" IsChecked="{Binding TodoValue.Done}" VerticalOptions="Center" /></HorizontalStackLayout>
+    <HorizontalStackLayout HorizontalOptions="End" Padding="0,8,0,0" Spacing="8">
+        <Button BackgroundColor="Transparent" TextColor="{ AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" BorderColor="Gray" BorderWidth="1" Command="{Binding OnCancelCommand}" Text="Cancel" WidthRequest="120" />
+        <Button x:Name="ApplyButton" BackgroundColor="{StaticResource Positive}" TextColor="{StaticResource Gray900}" Command="{Binding OnAcceptCommand}" Text="{Binding ApplyName}" WidthRequest="120" /></HorizontalStackLayout></VerticalStackLayout></ContentPage>
